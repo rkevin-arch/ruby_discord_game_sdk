@@ -1,5 +1,6 @@
 #include "ruby_discord_game_sdk.h"
 #include "user.h"
+#include "activity.h"
 #include "application_manager.h"
 #include "user_manager.h"
 #include "image_manager.h"
@@ -33,12 +34,19 @@ VALUE rb_discord_init(VALUE self, VALUE client_id, VALUE flags){
     return INT2NUM(result);
 }
 
+VALUE rb_discord_run_callbacks(VALUE self) {
+    CHECK_DISCORD_SDK_INITIALIZED
+    return INT2NUM(DiscordSDK.core->run_callbacks(DiscordSDK.core));
+}
+
 void Init_ruby_discord_game_sdk(void) {
     memset(&DiscordSDK, 0, sizeof(struct DiscordSDK));
     rb_mDiscordGameSDK = rb_define_module("DiscordGameSDK");
     rb_define_module_function(rb_mDiscordGameSDK, "init", rb_discord_init, 2);
+    rb_define_module_function(rb_mDiscordGameSDK, "run_callbacks", rb_discord_run_callbacks, 0);
 
     rb_discord_init_user(rb_mDiscordGameSDK);
+    rb_discord_init_activity(rb_mDiscordGameSDK);
 
     rb_discord_init_application_manager(rb_mDiscordGameSDK);
     rb_discord_init_user_manager(rb_mDiscordGameSDK);
