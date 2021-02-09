@@ -22,6 +22,7 @@ const rb_data_type_t rb_discord_user_type = {
 VALUE rb_discord_user_alloc(VALUE self) {
     // allocate memory for newly created object
     struct DiscordUser* data = malloc(sizeof(struct DiscordUser));
+    memset(data, 0, sizeof(struct DiscordUser));
     return TypedData_Wrap_Struct(self, &rb_discord_user_type, data);
 }
 
