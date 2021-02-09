@@ -41,6 +41,8 @@ VALUE rb_discord_run_callbacks(VALUE self) {
 
 void Init_ruby_discord_game_sdk(void) {
     memset(&DiscordSDK, 0, sizeof(struct DiscordSDK));
+    rb_oDiscordPendingCallbacks = rb_ary_new();
+    rb_global_variable(&rb_oDiscordPendingCallbacks); // globally load array to prevent garbage collection for anything in it
     rb_mDiscordGameSDK = rb_define_module("DiscordGameSDK");
     rb_define_module_function(rb_mDiscordGameSDK, "init", rb_discord_init, 2);
     rb_define_module_function(rb_mDiscordGameSDK, "run_callbacks", rb_discord_run_callbacks, 0);
