@@ -36,7 +36,7 @@ VALUE rb_discord_init(VALUE self, VALUE client_id, VALUE flags){
 void Init_ruby_discord_game_sdk(void) {
     memset(&DiscordSDK, 0, sizeof(struct DiscordSDK));
     rb_mDiscordGameSDK = rb_define_module("DiscordGameSDK");
-    rb_define_method(rb_mDiscordGameSDK, "init", rb_discord_init, 2);
+    rb_define_module_function(rb_mDiscordGameSDK, "init", rb_discord_init, 2);
 
     rb_discord_init_user(rb_mDiscordGameSDK);
 
