@@ -11,5 +11,6 @@
 *.o
 *.a
 mkmf.log
+*.swp
 vendor
 Gemfile.lock
