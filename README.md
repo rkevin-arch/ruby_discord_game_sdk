@@ -38,4 +38,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-This gem also uses the [Discord SDK](https://discord.com/developers/docs/game-sdk/discord) (which is kind of the point), which is proprietary. Everything under `game_sdk/` is owned by Discord.
+This gem also uses the [Discord SDK](https://discord.com/developers/docs/game-sdk/discord) (which is kind of the point), which is proprietary. Everything under `third_party/` is owned by Discord.
