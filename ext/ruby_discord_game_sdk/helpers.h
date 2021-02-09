@@ -149,6 +149,9 @@
     rb_define_method(klass, #name, rb_discord_##type##_get_##name, 0); \
     rb_define_method(klass, #name "=", rb_discord_##type##_set_##name, 1);
 
+#define EXPOSE_FUNCTION(klass, type, name, argc) \
+    rb_define_module_function(klass, #name, rb_discord_##type##_##name, argc);
+
 void rb_discord_validate_callback_proc(VALUE proc, int argc);
 VALUE rb_discord_call_callback(VALUE ary);
 void discord_callback_wrapper_nodata(void* callback_data, enum EDiscordResult result);
