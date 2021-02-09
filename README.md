@@ -1,8 +1,8 @@
-# RubyDiscordGameSdk
+# Ruby Discord Game SDK
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby_discord_game_sdk`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is a Ruby gem that implements bindings for the Discord [Game SDK](https://discord.com/developers/docs/game-sdk/discord), so your games using Ruby can use these tools. This is developed for [ModShot](https://github.com/Astrabit-ST/Modshot-Core), but any Ruby program should be able to use this.
 
-TODO: Delete this and the text above, and describe your gem
+NOTE: This is a work in progress, and it is currently not usable. The core features are not finished yet.
 
 ## Installation
 
@@ -37,3 +37,5 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+This gem also uses the [Discord SDK](https://discord.com/developers/docs/game-sdk/discord) (which is kind of the point), which is proprietary. Everything under `game_sdk/` is owned by Discord.
