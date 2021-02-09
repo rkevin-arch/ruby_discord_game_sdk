@@ -2,6 +2,7 @@
 #include "user.h"
 
 VALUE rb_mDiscordGameSDK;
+VALUE rb_oDiscordPendingCallbacks;
 
 void Init_ruby_discord_game_sdk(void) {
     rb_mDiscordGameSDK = rb_define_module("DiscordGameSDK");

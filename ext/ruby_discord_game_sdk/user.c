@@ -4,46 +4,8 @@
 
 VALUE rb_cDiscordUser;
 
-size_t rb_discord_user_dsize(const void* data) {
-    return sizeof(struct DiscordUser);
-}
-
-const rb_data_type_t rb_discord_user_type = {
-    .wrap_struct_name = "DiscordGameSDK::User",
-    .function = {
-        .dmark = NULL,
-        .dfree = free,
-        .dsize = rb_discord_user_dsize,
-    },
-    .data = NULL,
-    .flags = RUBY_TYPED_FREE_IMMEDIATELY,
-};
-
-VALUE rb_discord_user_alloc(VALUE self) {
-    // allocate memory for newly created object
-    struct DiscordUser* data = malloc(sizeof(struct DiscordUser));
-    memset(data, 0, sizeof(struct DiscordUser));
-    return TypedData_Wrap_Struct(self, &rb_discord_user_type, data);
-}
-
-inline struct DiscordUser* rb_discord_user_get_struct(VALUE self) {
-    // given a user ruby object, return the underlying DiscordUser struct
-    struct DiscordUser* data;
-    TypedData_Get_Struct(self, struct DiscordUser, &rb_discord_user_type, data);
-    return data;
-}
-
-void rb_discord_user_set_struct(VALUE self, struct DiscordUser* data) {
-    // given a DiscordUser struct, copy its data into the user ruby object
-    // this is meant to be called by the callback function only
-    memcpy(rb_discord_user_get_struct(self), data, sizeof(struct DiscordUser));
-}
-
-VALUE rb_discord_user_from_struct(struct DiscordUser* data) {
-    VALUE self = rb_discord_user_alloc(rb_cDiscordUser);
-    rb_discord_user_set_struct(self, data);
-    return self;
-}
+DEFINE_DISCORD_TYPE(user, struct DiscordUser)
+DEFINE_STANDARD_CALLBACK_FUNC(user, struct DiscordUser, rb_cDiscordUser);
 
 // begin attribute getters / setters
 
