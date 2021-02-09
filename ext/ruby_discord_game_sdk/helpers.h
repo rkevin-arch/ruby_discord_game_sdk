@@ -93,45 +93,57 @@
         DiscordSDK.##type## = DiscordSDK.core->get_##type##_manager(DiscordSDK.core) \
     }
 
-#define DEFINE_ATTRIBUTE_INT(type, name) \
+#define DEFINE_RENAMED_ATTRIBUTE_INT(type, name, path) \
     VALUE rb_discord_##type##_get_##name(VALUE self) { \
-        return INT2NUM(rb_discord_##type##_get_struct(self)->name); \
+        return INT2NUM(rb_discord_##type##_get_struct(self)->path); \
     } \
     VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
-        rb_discord_##type##_get_struct(self)->name = NUM2INT(val); \
+        rb_discord_##type##_get_struct(self)->path = NUM2INT(val); \
         return Qnil; \
     }
 
-#define DEFINE_ATTRIBUTE_LL(type, name) \
+#define DEFINE_RENAMED_ATTRIBUTE_LL(type, name, path) \
     VALUE rb_discord_##type##_get_##name(VALUE self) { \
-        return LL2NUM(rb_discord_##type##_get_struct(self)->name); \
+        return LL2NUM(rb_discord_##type##_get_struct(self)->path); \
     } \
     VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
-        rb_discord_##type##_get_struct(self)->name = NUM2LL(val); \
+        rb_discord_##type##_get_struct(self)->path = NUM2LL(val); \
         return Qnil; \
     }
 
-#define DEFINE_ATTRIBUTE_STR(type, name, len) \
+#define DEFINE_RENAMED_ATTRIBUTE_STR(type, name, path, len) \
     VALUE rb_discord_##type##_get_##name(VALUE self) { \
-        return rb_str_new_cstr(rb_discord_##type##_get_struct(self)->name); \
+        return rb_str_new_cstr(rb_discord_##type##_get_struct(self)->path); \
     } \
     VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
         Check_Type(val, T_STRING); \
         if(RSTRING_LEN(val) >= len) { \
             rb_raise(rb_eArgError, "The length of the string may not exceed %d bytes", len-1); \
         } \
-        memcpy(rb_discord_##type##_get_struct(self)->name, StringValuePtr(val), RSTRING_LEN(val)); \
-        rb_discord_##type##_get_struct(self)->name[RSTRING_LEN(val)] = '\0'; \
+        memcpy(rb_discord_##type##_get_struct(self)->path, StringValuePtr(val), RSTRING_LEN(val)); \
+        rb_discord_##type##_get_struct(self)->path[RSTRING_LEN(val)] = '\0'; \
         return Qnil; \
     }
 
-#define DEFINE_ATTRIBUTE_BOOL(type, name) \
+#define DEFINE_RENAMED_ATTRIBUTE_BOOL(type, name, path) \
     VALUE rb_discord_##type##_get_##name(VALUE self) { \
-        return BOOL2RB(rb_discord_##type##_get_struct(self)->name); \
+        return BOOL2RB(rb_discord_##type##_get_struct(self)->path); \
     } \
     VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
-        rb_discord_##type##_get_struct(self)->name = RTEST(val); \
+        rb_discord_##type##_get_struct(self)->path = RTEST(val); \
     }
+
+#define DEFINE_ATTRIBUTE_INT(type, name) \
+    DEFINE_RENAMED_ATTRIBUTE_INT(type, name, name)
+
+#define DEFINE_ATTRIBUTE_LL(type, name) \
+    DEFINE_RENAMED_ATTRIBUTE_LL(type, name, name)
+
+#define DEFINE_ATTRIBUTE_STR(type, name, len) \
+    DEFINE_RENAMED_ATTRIBUTE_STR(type, name, name, len)
+
+#define DEFINE_ATTRIBUTE_BOOL(type, name) \
+    DEFINE_RENAMED_ATTRIBUTE_BOOL(type, name, name)
 
 #define EXPOSE_ATTRIBUTE(klass, type, name) \
     rb_define_method(klass, #name, rb_discord_##type##_get_##name, 0); \
