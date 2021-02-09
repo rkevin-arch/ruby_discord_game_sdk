@@ -4,7 +4,7 @@ require_relative "lib/ruby_discord_game_sdk/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "ruby_discord_game_sdk"
-  spec.version       = RubyDiscordGameSDK::VERSION
+  spec.version       = DiscordGameSDK::VERSION
   spec.authors       = ["rkevin"]
   spec.email         = ["rk@rkevin.dev"]
 
