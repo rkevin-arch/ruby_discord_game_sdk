@@ -93,6 +93,50 @@
         DiscordSDK.##type## = DiscordSDK.core->get_##type##_manager(DiscordSDK.core) \
     }
 
+#define DEFINE_ATTRIBUTE_INT(type, name) \
+    VALUE rb_discord_##type##_get_##name(VALUE self) { \
+        return INT2NUM(rb_discord_##type##_get_struct(self)->name); \
+    } \
+    VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
+        rb_discord_##type##_get_struct(self)->name = NUM2INT(val); \
+        return Qnil; \
+    }
+
+#define DEFINE_ATTRIBUTE_LL(type, name) \
+    VALUE rb_discord_##type##_get_##name(VALUE self) { \
+        return LL2NUM(rb_discord_##type##_get_struct(self)->name); \
+    } \
+    VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
+        rb_discord_##type##_get_struct(self)->name = NUM2LL(val); \
+        return Qnil; \
+    }
+
+#define DEFINE_ATTRIBUTE_STR(type, name, len) \
+    VALUE rb_discord_##type##_get_##name(VALUE self) { \
+        return rb_str_new_cstr(rb_discord_##type##_get_struct(self)->name); \
+    } \
+    VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
+        Check_Type(val, T_STRING); \
+        if(RSTRING_LEN(val) >= len) { \
+            rb_raise(rb_eArgError, "The length of the string may not exceed %d bytes", len-1); \
+        } \
+        memcpy(rb_discord_##type##_get_struct(self)->name, StringValuePtr(val), RSTRING_LEN(val)); \
+        rb_discord_##type##_get_struct(self)->name[RSTRING_LEN(val)] = '\0'; \
+        return Qnil; \
+    }
+
+#define DEFINE_ATTRIBUTE_BOOL(type, name) \
+    VALUE rb_discord_##type##_get_##name(VALUE self) { \
+        return BOOL2RB(rb_discord_##type##_get_struct(self)->name); \
+    } \
+    VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
+        rb_discord_##type##_get_struct(self)->name = RTEST(val); \
+    }
+
+#define EXPOSE_ATTRIBUTE(klass, type, name) \
+    rb_define_method(klass, #name, rb_discord_##type##_get_##name, 0); \
+    rb_define_method(klass, #name "=", rb_discord_##type##_set_##name, 1);
+
 void rb_discord_validate_callback_proc(VALUE proc, int argc);
 VALUE rb_discord_call_callback(VALUE ary);
 void discord_callback_wrapper_nodata(void* callback_data, enum EDiscordResult result);
