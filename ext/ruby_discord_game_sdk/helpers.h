@@ -83,6 +83,16 @@
         } \
     }
 
+#define CHECK_DISCORD_SDK_INITIALIZED \
+    if (!DiscordSDK.initialized) \
+        rb_raise(rb_eRuntimeError, "The Discord SDK is not initialized. Please call DiscordGameSDK.init first.");
+
+#define CHECK_DISCORD_MGR_INITIALIZED(type) \
+    CHECK_DISCORD_SDK_INITIALIZED \
+    if (DiscordSDK.##type == NULL) { \
+        DiscordSDK.##type## = DiscordSDK.core->get_##type##_manager(DiscordSDK.core) \
+    }
+
 void rb_discord_validate_callback_proc(VALUE proc, int argc);
 VALUE rb_discord_call_callback(VALUE ary);
 void discord_callback_wrapper_nodata(void* callback_data, enum EDiscordResult result);
