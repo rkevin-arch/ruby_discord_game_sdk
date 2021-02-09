@@ -89,8 +89,8 @@
 
 #define CHECK_DISCORD_MGR_INITIALIZED(type) \
     CHECK_DISCORD_SDK_INITIALIZED \
-    if (DiscordSDK.##type == NULL) { \
-        DiscordSDK.##type## = DiscordSDK.core->get_##type##_manager(DiscordSDK.core) \
+    if (DiscordSDK.type == NULL) { \
+        DiscordSDK.type = DiscordSDK.core->get_##type##_manager(DiscordSDK.core); \
     }
 
 #define DEFINE_RENAMED_ATTRIBUTE_INT(type, name, path) \
