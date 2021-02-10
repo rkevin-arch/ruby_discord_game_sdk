@@ -27,11 +27,6 @@ NOTE: This is a work in progress, and it is currently not usable. The core featu
 - [ ] DiscordSku
 - [ ] DiscordInputMode
 - [ ] DiscordUserAchievement
-- [ ] Discord
-- [ ] Discord
-- [ ] Discord
-- [ ] Discord
-- [ ] Discord
 
 ### Managers implemented
 - [ ] ApplicationManager
