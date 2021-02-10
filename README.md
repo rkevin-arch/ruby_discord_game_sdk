@@ -4,6 +4,69 @@ This is a Ruby gem that implements bindings for the Discord [Game SDK](https://d
 
 NOTE: This is a work in progress, and it is currently not usable. The core features are not finished yet.
 
+## Development progress
+
+### Data classes implemented (including the structs that are not implemented but exposed on the parent)
+
+- [x] DiscordUser
+- [ ] DiscordOAuth2Token
+- [ ] DiscordImageHandle
+- [ ] DiscordImageDimensions
+- [x] DiscordActivityTimestamps
+- [x] DiscordActivityAssets
+- [x] DiscordPartySize
+- [x] DiscordActivityParty
+- [x] DiscordActivitySecrets
+- [x] DiscordActivity
+- [ ] DiscordPresence
+- [ ] DiscordRelationship
+- [ ] DiscordLobby
+- [ ] DiscordFileStat
+- [ ] DiscordEntitlement
+- [ ] DiscordSkuPrive
+- [ ] DiscordSku
+- [ ] DiscordInputMode
+- [ ] DiscordUserAchievement
+- [ ] Discord
+- [ ] Discord
+- [ ] Discord
+- [ ] Discord
+- [ ] Discord
+
+### Managers implemented
+- [ ] ApplicationManager
+- [ ] UserManager
+- [ ] ImageManager
+- [x] ActivityManager
+- [ ] RelationshipManager
+- [ ] LobbyManager
+- [ ] NetworkManager
+- [ ] OverlayManager
+- [ ] StorageManager
+- [ ] StoreManager
+- [ ] VoiceManager
+- [ ] AchievementManager
+
+### Others
+- [ ] Core functionality
+  - [x] Initialization
+  - [ ] Teardown
+  - [x] Run callbacks
+  - [ ] Log hooks
+- [x] All enums
+- [ ] DiscordLobbyTransaction
+- [ ] DiscordLobbySearchQuery
+- [ ] Events
+  - [ ] UserEvents
+  - [ ] ActivityEvents
+  - [ ] RelationshipEvents
+  - [ ] LobbyEvents
+  - [ ] NetworkEvents
+  - [ ] OverlayEvents
+  - [ ] StoreEvents
+  - [ ] VoiceEvents
+  - [ ] AchievementEvents
+
 ## Installation
 
 Add this line to your application's Gemfile:
