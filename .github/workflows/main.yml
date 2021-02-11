@@ -16,7 +16,8 @@ jobs:
         gem install bundler -v 2.2.8
         bundle install
         bundle exec rake
-        bundle exec rake install -i dist
+        bundle exec rake install
+        gem install -i dist pkg/*
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
@@ -35,7 +36,8 @@ jobs:
         gem install bundler -v 2.2.8
         bundle install
         bundle exec rake
-        bundle exec rake install -i dist
+        bundle exec rake install
+        gem install -i dist pkg/*
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
