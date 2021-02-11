@@ -44,7 +44,7 @@ jobs:
         setx CONAN_USE_ALWAYS_SHORT_PATHS 1
     - name: Build ruby and extension
       run: |
-        conan install --build=missing
+        conan install --build=missing .
         conan build .
     - name: Upload artifact
       uses: actions/upload-artifact@v2
