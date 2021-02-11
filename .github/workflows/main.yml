@@ -27,13 +27,17 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "2.5"
     - name: Run the default task
       run: |
         gem install bundler -v 2.2.8
         bundle install
         bundle exec rake
         bundle exec rake install
-        gem install -i dist pkg/*
+        gem install --platform x64-vcruntime140-ruby250.dll -i dist pkg/*
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
