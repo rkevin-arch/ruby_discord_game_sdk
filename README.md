@@ -62,6 +62,56 @@ NOTE: This is a work in progress, and it is currently not usable. The core featu
   - [ ] VoiceEvents
   - [ ] AchievementEvents
 
+## Usage
+
+This gem should expose the [SDK](https://discord.com/developers/docs/game-sdk/discord) functions without any fluff. For details on what this gem provides, check out Discord's documentation on the SDK.
+
+The things that are different between the SDKs:
+- You can instantiate the SDK using `DiscordGameSDK::init(client_id, flags)`. Afterwards, no need to get any managers, just do `DiscordGameSDK::SomeManager::do_something`.
+- Enums are just integers under `DiscordGameSDK`. For example, the OK return code is `DiscordGameSDK::Result::Ok`, the Playing activity type is `DiscordGameSDK::ActivityType::Playing`, etc. Check [enums.rb](lib/ruby_discord_game_sdk/enums.rb) for a list.
+- For functions that take callbacks, you should use a Proc. For example:
+  ```ruby
+  callback = Proc.new do |result|
+    # do something with the result
+  end
+  DiscordGameSDK::ActivityManager.update_activity(activity, callback)
+  ```
+  If you don't care about getting the result (and is fine to ignore the error even if it fails), you can set the callback to `nil`.
+
+### Quickstart
+
+This code would set an activity on Discord.
+
+```ruby
+require "ruby_discord_game_sdk"
+DiscordGameSDK::init(REPLACE_ME_WITH_CLIENT_ID, DiscordGameSDK::CreateFlags::Default)
+
+# make sure this run_callbacks function runs every frame in your game
+# you can add this to a function that is called every frame
+# for example, add it to the update function in `Game_System.rb`
+# (unfortunately RMXP doesn't have a good place to add a function that's called every frame,
+# i'm not sure if this actuall will be called outside of a map (e.g. on the menu))
+DiscordGameSDK::run_callbacks
+
+# construct an activity
+activity = DiscordGameSDK::Activity.new
+activity.type = DiscordGameSDK::ActivityType::Playing
+activity.state = "In an area of the game"
+activity.assets_large_image = "image" # some image you uploaded in the developer portal
+activity.timestamp_start = Time.now.to_i
+
+# create callback function
+callback = Proc.new do |result|
+  if result != DiscordGameSDK::Result::Ok
+    puts "Set activity failed: " + result.to_s
+end
+
+# set the activity
+DiscordGameSDK::ActivityManager.update_activity(activity, callback)
+# note this function returns immediately, and the callback function is called later
+
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
