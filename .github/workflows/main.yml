@@ -48,7 +48,7 @@ jobs:
         setx CONAN_USE_ALWAYS_SHORT_PATHS 1
     - name: Build ruby and extension
       run: |
-        conan install ruby/2.5.3@eliza/testing --build-missing
+        conan install ruby/2.5.3@eliza/testing --build=missing
         conan install .
         conan build .
     - name: Upload artifact
