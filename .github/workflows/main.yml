@@ -27,10 +27,6 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: "2.5"
     - name: Run the default task
       run: |
         gem install bundler -v 2.2.8
