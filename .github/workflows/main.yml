@@ -37,5 +37,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ruby-discord-game-sdk-linux-${{ github.sha }}
+        name: ruby-discord-game-sdk-windows-${{ github.sha }}
         path: pkg
