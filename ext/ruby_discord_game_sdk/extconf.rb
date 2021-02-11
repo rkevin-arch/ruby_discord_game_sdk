@@ -16,6 +16,8 @@ if not find_header("discord_game_sdk.h", HEADER_DIR)
   abort "Cannot find the Discord Game SDK header"
 end
 
+puts LIBRARY_DIR
+
 $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R. -l:discord_game_sdk.so'
 $CFLAGS += ' -g -O0'
 create_makefile("ruby_discord_game_sdk/ruby_discord_game_sdk")
