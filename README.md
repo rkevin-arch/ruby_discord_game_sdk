@@ -104,6 +104,7 @@ activity.timestamp_start = Time.now.to_i
 callback = Proc.new do |result|
   if result != DiscordGameSDK::Result::Ok
     puts "Set activity failed: " + result.to_s
+  end
 end
 
 # set the activity
