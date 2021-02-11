@@ -8,16 +8,9 @@ class RubyDiscordGameSDKConan(ConanFile):
     url = "https://github.com/rkevin-arch/ruby-discord-game-sdk"
     description = "Ruby bindings for the Discord SDK. Note this conanfile is ONLY meant to build binaries for the ModShot project on Windows (using ruby/2.5.3@eliza/testing), and this is not meant to be a proper conan package."
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake"
     exports_sources = "*"
     requires = (
         "ruby/2.5.3@eliza/testing",
-        # override
-        "zlib/1.2.11",
-    )
-
-    default_options = (
-        "ruby:with_openssl=True",
     )
 
     def build(self):
