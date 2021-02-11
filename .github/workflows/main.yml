@@ -16,12 +16,12 @@ jobs:
         gem install bundler -v 2.2.8
         bundle install
         bundle exec rake
-        bundle exec rake install
+        bundle exec rake install -i dist
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: ruby-discord-game-sdk-linux-${{ github.sha }}
-        path: pkg
+        path: dist/gems
   build-windows:
     runs-on: windows-2019
     steps:
@@ -35,9 +35,9 @@ jobs:
         gem install bundler -v 2.2.8
         bundle install
         bundle exec rake
-        bundle exec rake install
+        bundle exec rake install -i dist
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: ruby-discord-game-sdk-windows-${{ github.sha }}
-        path: pkg
+        path: dist/gems
