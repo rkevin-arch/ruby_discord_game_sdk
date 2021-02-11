@@ -4,7 +4,7 @@ require "mkmf"
 
 THIRDPARTY_DIR = File.join(File.dirname(__FILE__), "../../third_party")
 HEADER_DIR = File.join(THIRDPARTY_DIR, "include")
-if RUBY_PLATFORM.start_with?("x86_64")
+if RUBY_PLATFORM.start_with?("x86_64") or RUBY_PLATFORM.start_with?("x64")
   LIBRARY_DIR = File.join(THIRDPARTY_DIR, "lib/x86_64")
 elsif RUBY_PLATFORM.start_with?("i386") or RUBY_PLATFORM.start_with?("i686")
   LIBRARY_DIR = File.join(THIRDPARTY_DIR, "lib/x86")

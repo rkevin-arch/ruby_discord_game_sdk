@@ -20,6 +20,10 @@ VALUE rb_oDiscordPendingCallbacks;
 
 struct DiscordSDK DiscordSDK;
 
+void rb_discord_debug_log(void* hook_data, enum EDiscordLogLevel level, const char* message) {
+    puts(message);
+}
+
 VALUE rb_discord_init(VALUE self, VALUE client_id, VALUE flags){
     struct DiscordCreateParams params;
     DiscordCreateParamsSetDefault(&params);
@@ -31,6 +35,7 @@ VALUE rb_discord_init(VALUE self, VALUE client_id, VALUE flags){
         return INT2NUM(result);
     }
     DiscordSDK.initialized = true;
+    DiscordSDK.core->set_log_hook(DiscordSDK.core, DiscordLogLevel_Debug, NULL, rb_discord_debug_log);
     return INT2NUM(result);
 }
 
