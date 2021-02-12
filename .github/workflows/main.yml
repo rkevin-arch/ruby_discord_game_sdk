@@ -39,7 +39,8 @@ jobs:
         conan install .
     - name: Build extension
       run: |
-        ruby/bin/gem install bundler
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        RUBYLIB=./lib/ruby/2.5.0 ruby/bin/gem install bundler
         bundle install
         bundle exec rake
         bundle exec rake build
