@@ -14,11 +14,16 @@ class RubyDiscordGameSDKConan(ConanFile):
     )
 
     def build(self):
-        os.system("ruby/bin/gem install bundler")
-        os.system("bundle install")
-        os.system("bundle exec rake")
-        os.system("bundle exec rake build")
-        os.system("ruby/bin/gem install -l -i build pkg/ruby_discord_game_sdk-*.gem")
+        if os.system("ruby/bin/gem install bundler") != 0:
+            raise Exception
+        if os.system("bundle install") != 0:
+            raise Exception
+        if os.system("bundle exec rake") != 0:
+            raise Exception
+        if os.system("bundle exec rake build") != 0:
+            raise Exception
+        if os.system("ruby/bin/gem install -l -i build pkg/ruby_discord_game_sdk-*.gem") != 0:
+            raise Exception
 
     def package(self):
         self.copy("*", dst="bin", src="bin")
