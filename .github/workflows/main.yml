@@ -25,24 +25,11 @@ jobs:
         path: dist/gems
   build-windows:
     runs-on: windows-2019
-    env:
-      CONAN_USER_HOME: C:\.conan
-      CONAN_USER_HOME_SHORT: C:\.conan
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: "2.5"
-    - name: Run the default task
-      run: |
-        gem install bundler -v 2.2.8
-        bundle install
-        bundle exec rake
-        bundle exec rake build
     - name: Install and setup conan
       run: |
-        choco install -y vim; pip install conan
+        pip install conan
         conan remote add eliza https://api.bintray.com/conan/eliza/conan
         conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
         setx CONAN_USE_ALWAYS_SHORT_PATHS 1
