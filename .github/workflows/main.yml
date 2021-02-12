@@ -33,11 +33,17 @@ jobs:
         conan remote add eliza https://api.bintray.com/conan/eliza/conan
         conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
         setx CONAN_USE_ALWAYS_SHORT_PATHS 1
-    - name: Build ruby and extension
+    - name: Build ruby
       run: |
         conan install ruby/2.5.3@eliza/testing --build=missing
         conan install .
-        conan build .
+    - name: Build extension
+      run: |
+        ruby/bin/gem install bundler
+        bundle install
+        bundle exec rake
+        bundle exec rake build
+        ruby/bin/gem install -l -i build pkg/ruby_discord_game_sdk-*.gemP
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
