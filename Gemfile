@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 # Specify your gem's dependencies in ruby_discord_game_sdk.gemspec
 gemspec
