@@ -1,4 +1,4 @@
-import os
+roihfimport os
 from conans import CMake, ConanFile, tools
 
 class RubyDiscordGameSDKConan(ConanFile):
@@ -14,7 +14,19 @@ class RubyDiscordGameSDKConan(ConanFile):
     )
 
     def build(self):
-        pass
+        os.environ['RUBYLIB']='./ruby/lib/ruby/2.5.0'
+        print(os.getcwd())
+        os.system("dir")
+        if os.system("ruby/bin/gem install bundler") != 0:
+            raise Exception
+        if os.system("bundle install") != 0:
+            raise Exception
+        if os.system("bundle exec rake") != 0:
+            raise Exception
+        if os.system("bundle exec rake build") != 0:
+            raise Exception
+        if os.system("ruby/bin/gem install -l -i build pkg/ruby_discord_game_sdk-*.gem") != 0:
+            raise Exception
 
     def package(self):
         self.copy("*", dst="bin", src="bin")

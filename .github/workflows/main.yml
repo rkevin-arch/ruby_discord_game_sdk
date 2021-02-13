@@ -39,12 +39,7 @@ jobs:
         conan install .
     - name: Build extension
       run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-        RUBYLIB=./lib/ruby/2.5.0 ruby/bin/gem install bundler
-        bundle install
-        bundle exec rake
-        bundle exec rake build
-        ruby/bin/gem install -l -i build pkg/ruby_discord_game_sdk-*.gemP
+        conan build .
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
