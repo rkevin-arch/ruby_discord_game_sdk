@@ -20,9 +20,9 @@ VALUE rb_discord_activity_manager_register_steam(VALUE self, VALUE steam_id) {
     ));
 }
 
-VALUE rb_discord_activity_manager_update_activity(VALUE self, VALUE activity, VALUE callback) {
+VALUE rb_discord_activity_manager_update_activity(VALUE self, VALUE activity) {
     CHECK_DISCORD_MGR_INITIALIZED(activity)
-    rb_discord_validate_callback_proc(callback, 1);
+    VALUE callback = rb_discord_get_callback_proc(1);
     DiscordSDK.activity->update_activity(
         DiscordSDK.activity,
         rb_discord_activity_get_struct(activity),
@@ -32,9 +32,9 @@ VALUE rb_discord_activity_manager_update_activity(VALUE self, VALUE activity, VA
     return Qnil;
 }
 
-VALUE rb_discord_activity_manager_clear_activity(VALUE self, VALUE callback) {
+VALUE rb_discord_activity_manager_clear_activity(VALUE self) {
     CHECK_DISCORD_MGR_INITIALIZED(activity)
-    rb_discord_validate_callback_proc(callback, 1);
+    VALUE callback = rb_discord_get_callback_proc(1);
     DiscordSDK.activity->clear_activity(
         DiscordSDK.activity,
         (void*) callback,
@@ -43,9 +43,9 @@ VALUE rb_discord_activity_manager_clear_activity(VALUE self, VALUE callback) {
     return Qnil;
 }
 
-VALUE rb_discord_activity_manager_send_request_reply(VALUE self, VALUE user_id, VALUE reply, VALUE callback) {
+VALUE rb_discord_activity_manager_send_request_reply(VALUE self, VALUE user_id, VALUE reply) {
     CHECK_DISCORD_MGR_INITIALIZED(activity)
-    rb_discord_validate_callback_proc(callback, 1);
+    VALUE callback = rb_discord_get_callback_proc(1);
     DiscordSDK.activity->send_request_reply(
         DiscordSDK.activity,
         NUM2LL(user_id),
@@ -56,9 +56,9 @@ VALUE rb_discord_activity_manager_send_request_reply(VALUE self, VALUE user_id, 
     return Qnil;
 }
 
-VALUE rb_discord_activity_manager_send_invite(VALUE self, VALUE user_id, VALUE type, VALUE content, VALUE callback) {
+VALUE rb_discord_activity_manager_send_invite(VALUE self, VALUE user_id, VALUE type, VALUE content) {
     CHECK_DISCORD_MGR_INITIALIZED(activity)
-    rb_discord_validate_callback_proc(callback, 1);
+    VALUE callback = rb_discord_get_callback_proc(1);
     DiscordSDK.activity->send_invite(
         DiscordSDK.activity,
         NUM2LL(user_id),
@@ -70,9 +70,9 @@ VALUE rb_discord_activity_manager_send_invite(VALUE self, VALUE user_id, VALUE t
     return Qnil;
 }
 
-VALUE rb_discord_activity_manager_accept_invite(VALUE self, VALUE user_id, VALUE callback) {
+VALUE rb_discord_activity_manager_accept_invite(VALUE self, VALUE user_id) {
     CHECK_DISCORD_MGR_INITIALIZED(activity)
-    rb_discord_validate_callback_proc(callback, 1);
+    VALUE callback = rb_discord_get_callback_proc(1);
     DiscordSDK.activity->accept_invite(
         DiscordSDK.activity,
         NUM2LL(user_id),
@@ -86,9 +86,9 @@ void rb_discord_init_activity_manager(VALUE module) {
     rb_cDiscordActivityManager = rb_define_module_under(module, "ActivityManager");
     EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, register_command, 1);
     EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, register_steam, 1);
-    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, update_activity, 2);
-    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, clear_activity, 1);
-    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, send_request_reply, 3);
-    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, send_invite, 4);
-    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, accept_invite, 2);
+    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, update_activity, 1);
+    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, clear_activity, 0);
+    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, send_request_reply, 2);
+    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, send_invite, 3);
+    EXPOSE_FUNCTION(rb_cDiscordActivityManager, activity_manager, accept_invite, 1);
 }

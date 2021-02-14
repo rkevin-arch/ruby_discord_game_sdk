@@ -1,16 +1,15 @@
 #include "helpers.h"
 // misc helpers, along with some callback helpers
 
-void rb_discord_validate_callback_proc(VALUE proc, int argc) {
-    if (proc == Qnil)
-        return;
-    if (rb_obj_is_proc(proc) != Qtrue) {
-         rb_raise(rb_eTypeError, "Object passed in was not a proc (code block)");
-    }
+VALUE rb_discord_get_callback_proc(int argc) {
+    if (!rb_block_given_p())
+        return Qnil;
+    VALUE proc = rb_block_proc();
     if (rb_proc_arity(proc) != argc) {
          rb_raise(rb_eTypeError, "Proc (code block) passed in should take %d arguments, got %d", argc, rb_proc_arity(proc));
     }
     rb_ary_push(rb_oDiscordPendingCallbacks, proc); // adds this proc to a globally loaded array, to not make it garbage collected
+    return proc;
 }
 
 VALUE rb_discord_call_callback(VALUE ary) {

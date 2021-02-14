@@ -69,12 +69,11 @@ This gem should expose the [SDK](https://discord.com/developers/docs/game-sdk/di
 The things that are different between the SDKs:
 - You can instantiate the SDK using `DiscordGameSDK::init(client_id, flags)`. Afterwards, no need to get any managers, just do `DiscordGameSDK::SomeManager::do_something`.
 - Enums are just integers under `DiscordGameSDK`. For example, the OK return code is `DiscordGameSDK::Result::Ok`, the Playing activity type is `DiscordGameSDK::ActivityType::Playing`, etc. Check [enums.rb](lib/ruby_discord_game_sdk/enums.rb) for a list.
-- For functions that take callbacks, you should use a Proc. For example:
+- For functions that take callbacks, you should use a code block. For example:
   ```ruby
-  callback = Proc.new do |result|
-    # do something with the result
+  DiscordGameSDK::ActivityManager.update_activity(activity) do |result|
+    # do something with the result. note the update_activity function will return _before_ your code block is called.
   end
-  DiscordGameSDK::ActivityManager.update_activity(activity, callback)
   ```
   If you don't care about getting the result (and is fine to ignore the error even if it fails), you can set the callback to `nil`.
 
@@ -100,15 +99,12 @@ activity.state = "In an area of the game"
 activity.assets_large_image = "image" # some image you uploaded in the developer portal
 activity.timestamp_start = Time.now.to_i
 
-# create callback function
-callback = Proc.new do |result|
+# set the activity
+DiscordGameSDK::ActivityManager.update_activity(activity) do |result|
   if result != DiscordGameSDK::Result::Ok
     puts "Set activity failed: " + result.to_s
   end
 end
-
-# set the activity
-DiscordGameSDK::ActivityManager.update_activity(activity, callback)
 # note this function returns immediately, and the callback function is called later
 
 ```
