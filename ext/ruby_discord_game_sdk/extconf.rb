@@ -16,8 +16,8 @@ if not find_header("discord_game_sdk.h", HEADER_DIR)
   abort "Cannot find the Discord Game SDK header"
 end
 
-if /mswin|mingw|bccwin|cygwin|djgpp|wince/ !~ RUBY_PLATFORM
-  $LDFLAGS += ' /LIBPATH' + LIBRARY_DIR + ' /DEFAULTLIB:discord_game_sdk.dll.lib'
+if /mswin|mingw|bccwin|cygwin|djgpp|wince/ =~ RUBY_PLATFORM
+  $LDFLAGS += ' /LIBPATH:' + LIBRARY_DIR + ' /DEFAULTLIB:discord_game_sdk.dll.lib'
 else
   $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R. -l:discord_game_sdk.so'
 end
