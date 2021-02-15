@@ -17,9 +17,9 @@ if not find_header("discord_game_sdk.h", HEADER_DIR)
 end
 
 if Gem.win_platform?
-  $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R. -l:discord_game_sdk.dll.lib'
+  $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R./lib -l:discord_game_sdk.dll.lib'
 else
-  $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R. -l:discord_game_sdk.so'
+  $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R./lib -l:discord_game_sdk.so'
 end
 
 #$CFLAGS += ' -g -O0'
