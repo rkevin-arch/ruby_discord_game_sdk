@@ -16,7 +16,7 @@ if not find_header("discord_game_sdk.h", HEADER_DIR)
   abort "Cannot find the Discord Game SDK header"
 end
 
-if Gem.win_platform?
+if /mswin|mingw|bccwin|cygwin|djgpp|wince/ !~ RUBY_PLATFORM
   $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R./lib -l:discord_game_sdk.dll.lib'
 else
   $LDFLAGS += ' -L' + LIBRARY_DIR + ' -Wl,-R./lib -l:discord_game_sdk.so'
