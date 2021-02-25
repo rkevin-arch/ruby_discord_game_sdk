@@ -47,7 +47,7 @@ NOTE: This is a work in progress, and it is currently not usable. The core featu
   - [x] Initialization
   - [ ] Teardown
   - [x] Run callbacks
-  - [ ] Log hooks
+  - [x] Log hooks
 - [x] All enums
 - [ ] DiscordLobbyTransaction
 - [ ] DiscordLobbySearchQuery
@@ -84,6 +84,14 @@ This code would set an activity on Discord.
 ```ruby
 require "ruby_discord_game_sdk"
 DiscordGameSDK::init(REPLACE_ME_WITH_CLIENT_ID, DiscordGameSDK::CreateFlags::Default)
+
+# add a log hook so you can debug errors
+# your code block should take two arguments, one int (log level) and one string
+# this code block will be called on any discord log message higher than the level you specified
+# this is optional, but highly recommended to catch errors
+DiscordGameSDK::set_log_hook(DiscordGameSDK::LogLevel::Debug) do |level, message|
+    puts message
+end
 
 # make sure this run_callbacks function runs every frame in your game
 # you can add this to a function that is called every frame
