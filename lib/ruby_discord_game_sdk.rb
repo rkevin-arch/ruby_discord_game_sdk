@@ -2,7 +2,7 @@
 
 require_relative "ruby_discord_game_sdk/version"
 require_relative "ruby_discord_game_sdk/enums"
-require_relative "../ext/ruby_discord_game_sdk/ruby_discord_game_sdk"
+require "ruby_discord_game_sdk.so"
 
 module DiscordGameSDK
   class Error < StandardError; end
