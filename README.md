@@ -75,7 +75,7 @@ The things that are different between the SDKs:
     # do something with the result. note the update_activity function will return _before_ your code block is called.
   end
   ```
-  If you don't care about getting the result (and is fine to ignore the error even if it fails), you can set the callback to `nil`.
+  If you don't care about getting the result (and is fine to ignore the error even if it fails), you can omit the code block.
 
 ### Quickstart
 
