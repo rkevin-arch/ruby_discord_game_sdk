@@ -1,0 +1,45 @@
+name: Ruby
+
+on: [push,pull_request]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.1"
+    - name: Run the default task
+      run: |
+        gem install bundler -v 2.2.8
+        bundle install
+        bundle exec rake
+        bundle exec rake install
+        gem install -i dist pkg/*
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ruby-discord-game-sdk-linux-${{ github.sha }}
+        path: dist/gems
+  build-windows:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.1"
+    - name: Run the default task
+      run: |
+        gem install bundler -v 2.2.8
+        bundle install
+        bundle exec rake
+        bundle exec rake install
+        gem install -i dist pkg/*
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ruby-discord-game-sdk-windows-${{ github.sha }}
+        path: dist/gems
