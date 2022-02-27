@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    ruby_discord_game_sdk (0.2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (13.0.6)
+    rake-compiler (1.1.9)
+      rake
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  rake (~> 13.0)
+  rake-compiler
+  ruby_discord_game_sdk!
+
+BUNDLED WITH
+   2.3.8
