@@ -23,4 +23,5 @@ else
 end
 
 #$CFLAGS += ' -g -O0'
+$CFLAGS += ' -Wno-unused-function'
 create_makefile("ruby_discord_game_sdk/ruby_discord_game_sdk")

@@ -131,6 +131,7 @@
     } \
     VALUE rb_discord_##type##_set_##name(VALUE self, VALUE val) { \
         rb_discord_##type##_get_struct(self)->path = RTEST(val); \
+        return Qnil; \
     }
 
 #define DEFINE_ATTRIBUTE_INT(type, name) \

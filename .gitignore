@@ -14,10 +14,3 @@
 mkmf.log
 *.swp
 vendor
-Gemfile.lock
-
-conan*
-!conanfile.py
-graph_info.json
-/ruby
-/build
