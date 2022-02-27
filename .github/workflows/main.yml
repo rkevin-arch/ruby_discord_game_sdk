@@ -13,7 +13,7 @@ jobs:
         ruby-version: "3.1"
     - name: Run the default task
       run: |
-        gem install bundler -v 2.2.8
+        gem install bundler -v 2.3.8
         bundle install
         bundle exec rake
         bundle exec rake install
@@ -33,7 +33,7 @@ jobs:
         ruby-version: "3.1"
     - name: Run the default task
       run: |
-        gem install bundler -v 2.2.8
+        gem install bundler -v 2.3.8
         bundle install
         bundle exec rake
         bundle exec rake install

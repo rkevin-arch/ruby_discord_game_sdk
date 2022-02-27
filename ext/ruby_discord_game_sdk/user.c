@@ -14,7 +14,7 @@ DEFINE_ATTRIBUTE_STR(user, avatar, 128)
 DEFINE_ATTRIBUTE_BOOL(user, bot)
 
 void rb_discord_init_user(VALUE module){
-    rb_cDiscordUser = rb_define_class_under(module, "User", rb_cData);
+    rb_cDiscordUser = rb_define_class_under(module, "User", rb_cObject);
     rb_define_alloc_func(rb_cDiscordUser, rb_discord_user_alloc);
 
     EXPOSE_ATTRIBUTE(rb_cDiscordUser, user, id)

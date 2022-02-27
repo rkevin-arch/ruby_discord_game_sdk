@@ -28,7 +28,7 @@ DEFINE_ATTRIBUTE_BOOL(activity, instance)
 // end attribute getters / setters
 
 void rb_discord_init_activity(VALUE module){
-    rb_cDiscordActivity = rb_define_class_under(module, "Activity", rb_cData);
+    rb_cDiscordActivity = rb_define_class_under(module, "Activity", rb_cObject);
     rb_define_alloc_func(rb_cDiscordActivity, rb_discord_activity_alloc);
 
     EXPOSE_ATTRIBUTE(rb_cDiscordActivity, activity, type)
