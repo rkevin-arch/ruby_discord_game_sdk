@@ -4,7 +4,7 @@ on: [push,pull_request]
 
 jobs:
   build-linux:
-    strategy: &strategy
+    strategy:
       matrix:
         ruby:
         - "2.5"
