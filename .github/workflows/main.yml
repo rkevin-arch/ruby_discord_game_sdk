@@ -3,7 +3,7 @@ name: Ruby
 on: [push,pull_request]
 
 jobs:
-  build-linux:
+  build:
     strategy:
       matrix:
         ruby:
