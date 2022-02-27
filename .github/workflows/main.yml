@@ -7,7 +7,6 @@ jobs:
     strategy:
       matrix:
         ruby:
-        - "2.5"
         - "3.1"
         os:
         - ubuntu
@@ -22,7 +21,7 @@ jobs:
     - name: Build extension and gem
       run: |
         bundle install
-        bundle exec rake build
+        bundle exec rake build || type tmp/*/ruby_discord_game_sdk/3.1.1/Makefile
     - name: Format artifact
       run: bin/format-artifact.sh ${{ matrix.os }}
       shell: bash
