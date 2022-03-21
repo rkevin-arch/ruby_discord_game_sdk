@@ -20,6 +20,7 @@ struct DiscordSDK { // storing actual discord instance in c, not ruby
     struct IDiscordStoreManager* store;
     struct IDiscordVoiceManager* voice;
     struct IDiscordAchievementManager* achievement;
+    struct IDiscordUserEvents user_events;
     VALUE log_callback;
 };
 
