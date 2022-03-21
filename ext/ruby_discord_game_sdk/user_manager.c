@@ -29,4 +29,5 @@ VALUE rb_discord_user_manager_get_user(VALUE self, VALUE user_id, VALUE reply) {
 void rb_discord_init_user_manager(VALUE module) {
     rb_cDiscordUserManager = rb_define_module_under(module, "UserManager");
     EXPOSE_FUNCTION(rb_cDiscordUserManager, user_manager, get_current_user, 0);
+    EXPOSE_FUNCTION(rb_cDiscordUserManager, user_manager, get_user, 2);
 }
