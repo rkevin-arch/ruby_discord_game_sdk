@@ -2,8 +2,6 @@
 
 This is a Ruby gem that implements bindings for the Discord [Game SDK](https://discord.com/developers/docs/game-sdk/discord), so your games using Ruby can use these tools. This is developed for [ModShot](https://github.com/Astrabit-ST/Modshot-Core), but any Ruby program should be able to use this.
 
-NOTE: This is a work in progress, and it is currently not usable. The core features are not finished yet.
-
 ## Development progress
 
 ### Data classes implemented (including the structs that are not implemented but exposed on the parent)
