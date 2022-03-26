@@ -93,6 +93,14 @@
         DiscordSDK.type = DiscordSDK.core->get_##type##_manager(DiscordSDK.core); \
     }
 
+#define CHECK_DISCORD_RESULT(result) \
+    { \
+        enum EDiscordResult _check_discord_result = result; \
+        if (_check_discord_result != DiscordResult_Ok) { \
+            rb_raise(rb_eRuntimeError, "Discord SDK returned non-OK value %d", _check_discord_result); \
+        } \
+    }
+
 #define DEFINE_RENAMED_ATTRIBUTE_INT(type, name, path) \
     VALUE rb_discord_##type##_get_##name(VALUE self) { \
         return INT2NUM(rb_discord_##type##_get_struct(self)->path); \

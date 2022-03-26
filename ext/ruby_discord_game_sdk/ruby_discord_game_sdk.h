@@ -20,8 +20,11 @@ struct DiscordSDK { // storing actual discord instance in c, not ruby
     struct IDiscordStoreManager* store;
     struct IDiscordVoiceManager* voice;
     struct IDiscordAchievementManager* achievement;
-    struct IDiscordUserEvents user_events;
     VALUE log_callback;
+    // some stuff specific for user manager
+    struct IDiscordUserEvents user_events; // used to store the function pointer for on_current_user_update
+    VALUE onCurrentUserUpdate; // will be used if the user wants to register a custom ruby function for this
+    bool receivedCurrentUserUpdate; // have we seen at least one currentUserUpdate event yet?
 };
 
 extern struct DiscordSDK DiscordSDK;

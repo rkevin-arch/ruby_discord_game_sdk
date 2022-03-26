@@ -7,4 +7,6 @@ extern VALUE rb_cDiscordUserManager;
 
 void rb_discord_init_user_manager(VALUE module);
 
+void rb_discord_on_current_user_update(void* event_data);
+
 #endif /* RUBY_DISCORD_GAME_SDK_USER_MANAGER_H */

@@ -37,13 +37,20 @@ VALUE rb_discord_init(VALUE self, VALUE client_id, VALUE flags){
     DiscordCreateParamsSetDefault(&params);
     params.client_id = NUM2LL(client_id);
     params.flags = NUM2LL(flags);
-    enum EDiscordResult result = DiscordCreate(DISCORD_VERSION, &params, &DiscordSDK.core);
+
+    DiscordSDK.user_events.on_current_user_update = rb_discord_on_current_user_update;
+    params.user_events = &DiscordSDK.user_events;
+
     DiscordSDK.log_callback = Qnil;
+    DiscordSDK.onCurrentUserUpdate = Qnil;
+    enum EDiscordResult result = DiscordCreate(DISCORD_VERSION, &params, &DiscordSDK.core);
     if (result != DiscordResult_Ok) {
         DiscordSDK.core = NULL;
         return INT2NUM(result);
     }
     DiscordSDK.initialized = true;
+    // do not lazy initialize the user manager since it takes some time for the current user to be ready
+    DiscordSDK.user = DiscordSDK.core->get_user_manager(DiscordSDK.core);
     return INT2NUM(result);
 }
 
